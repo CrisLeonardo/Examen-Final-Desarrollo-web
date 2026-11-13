@@ -1,0 +1,100 @@
+SEIS PRUEBAS EN POSTMAN - API DE ANIMALES
+======================================
+
+ANTES DE EMPEZAR
+1. Abre INICIAR.bat y deja abierta la ventana del servidor.
+2. Abre Postman. Puedes continuar sin cuenta.
+3. Para cada prueba abre una pestaña nueva con Ctrl+T.
+4. Copia SOLO el comando curl de la prueba, pégalo en el campo de la URL
+   de esa pestaña vacía y presiona Enter. Postman lo convierte en una
+   solicitud y la envía. Si no se envía, pulsa Send.
+5. No pegues los comandos en PowerShell ni en el cuadro Body.
+
+IMPORTANTE SOBRE EL ID
+El primer POST devuelve un número en "id", por ejemplo: "id": 10.
+En las pruebas 3, 4 y 6 reemplaza ID_AQUI por ESE número, sin comillas.
+Ejemplo: http://127.0.0.1:8000/api/animales/10/
+El número cambia cada vez que creas un animal. No uses un id de las capturas.
+
+
+1. POST - CREAR UN ANIMAL
+------------------------
+Copia esta línea completa:
+
+curl --request POST 'http://127.0.0.1:8000/api/animales/' --header 'Content-Type: application/json' --header 'Accept: application/json' --data '{"nombre":"Luna","especie":"Perro","raza":"Labrador","edad":3}'
+
+Resultado esperado: 201 Created.
+Anota el id de la respuesta para las pruebas 3, 4 y 6.
+Para ver lo enviado, abre la pestaña Body de la solicitud.
+Puedes decir: "Con POST creo un animal. El id y las fechas son automáticos."
+
+
+2. GET - LISTAR LOS ANIMALES
+--------------------------
+Copia esta línea completa:
+
+curl --request GET 'http://127.0.0.1:8000/api/animales/' --header 'Accept: application/json'
+
+Resultado esperado: 200 OK y una lista JSON entre corchetes [ ].
+Puedes decir: "GET obtiene todos los animales guardados."
+
+
+3. GET - CONSULTAR EL ANIMAL POR ID
+---------------------------------
+Primero reemplaza ID_AQUI por el id recibido en la prueba 1.
+Después copia esta línea completa:
+
+curl --request GET 'http://127.0.0.1:8000/api/animales/ID_AQUI/' --header 'Accept: application/json'
+
+Resultado esperado: 200 OK y únicamente el animal de ese id.
+Puedes decir: "Al agregar el id a la URL, consulto un solo registro."
+
+
+4. PUT - ACTUALIZAR EL ANIMAL
+----------------------------
+Reemplaza ID_AQUI por el mismo id de la prueba 1.
+Copia esta línea completa:
+
+curl --request PUT 'http://127.0.0.1:8000/api/animales/ID_AQUI/' --header 'Content-Type: application/json' --header 'Accept: application/json' --data '{"nombre":"Luna","especie":"Perro","raza":"Labrador","edad":4}'
+
+Resultado esperado: 200 OK. La edad ahora debe ser 4.
+Para ver lo enviado, abre la pestaña Body de la solicitud.
+Puedes decir: "PUT actualiza el animal. Envío los cuatro atributos."
+
+
+5. POST - ENVIAR DATOS INVALIDOS
+------------------------------
+Copia esta línea completa:
+
+curl --request POST 'http://127.0.0.1:8000/api/animales/' --header 'Content-Type: application/json' --header 'Accept: application/json' --data '{"nombre":"","edad":-1}'
+
+Resultado esperado: 400 Bad Request y errores de validación en JSON.
+Este error es INTENCIONAL: nombre está vacío, faltan especie y raza,
+y edad es negativa. No se debe crear ningún registro.
+Para ver lo enviado, abre la pestaña Body de la solicitud.
+Puedes decir: "La API rechaza los datos inválidos y los campos obligatorios ausentes."
+
+
+6. DELETE - ELIMINAR EL ANIMAL
+----------------------------
+Reemplaza ID_AQUI por el mismo id de la prueba 1.
+Comprueba que sea el animal que acabas de crear para esta demostración.
+Copia esta línea completa:
+
+curl --request DELETE 'http://127.0.0.1:8000/api/animales/ID_AQUI/' --header 'Accept: application/json'
+
+Resultado esperado: 204 No Content. La respuesta queda vacía; es correcto.
+Puedes decir: "DELETE elimina el registro y responde sin contenido."
+
+Comprobación opcional: repite el GET de la prueba 3 con ese mismo id.
+Ahora debe responder 404 Not Found porque el animal ya fue eliminado.
+
+
+SI NECESITAS TOMAR CAPTURAS
+--------------------------
+Debe verse el método, la URL completa, el estado y la respuesta.
+En las pruebas 1, 4 y 5 abre Body para mostrar también el JSON enviado.
+Si no cabe toda la respuesta, arrastra hacia arriba la línea que separa
+la solicitud y la respuesta para darle más espacio.
+
+Para repetir las seis pruebas, comienza por un POST nuevo y usa su nuevo id.

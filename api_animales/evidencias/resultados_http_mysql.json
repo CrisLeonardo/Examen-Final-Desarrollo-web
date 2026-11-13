@@ -1,0 +1,156 @@
+{
+  "herramienta": "Postman Desktop 12.36.3, modo sin cuenta",
+  "pruebas": [
+    {
+      "prueba": 1,
+      "herramienta": "Postman Desktop 12.36.3 - Lightweight API Client",
+      "metodo": "POST",
+      "url": "http://127.0.0.1:8000/api/animales/",
+      "enviado": {
+        "nombre": "Luna",
+        "especie": "Perro",
+        "raza": "Labrador",
+        "edad": 3
+      },
+      "estado": 201,
+      "captura": "01_crear.jpg",
+      "respuesta": "Ver captura real de Postman adjunta"
+    },
+    {
+      "prueba": 2,
+      "herramienta": "Postman Desktop 12.36.3 - Lightweight API Client",
+      "metodo": "GET",
+      "url": "http://127.0.0.1:8000/api/animales/",
+      "enviado": null,
+      "estado": 200,
+      "captura": "02_lista.jpg",
+      "respuesta": "Ver captura real de Postman adjunta"
+    },
+    {
+      "prueba": 3,
+      "herramienta": "Postman Desktop 12.36.3 - Lightweight API Client",
+      "metodo": "GET",
+      "url": "http://127.0.0.1:8000/api/animales/9/",
+      "enviado": null,
+      "estado": 200,
+      "captura": "03_detalle.jpg",
+      "respuesta": "Ver captura real de Postman adjunta"
+    },
+    {
+      "prueba": 4,
+      "herramienta": "Postman Desktop 12.36.3 - Lightweight API Client",
+      "metodo": "PUT",
+      "url": "http://127.0.0.1:8000/api/animales/9/",
+      "enviado": {
+        "nombre": "Luna",
+        "especie": "Perro",
+        "raza": "Labrador",
+        "edad": 4
+      },
+      "estado": 200,
+      "captura": "04_reemplazar.jpg",
+      "respuesta": "Ver captura real de Postman adjunta"
+    },
+    {
+      "prueba": 5,
+      "herramienta": "Postman Desktop 12.36.3 - Lightweight API Client",
+      "metodo": "POST",
+      "url": "http://127.0.0.1:8000/api/animales/",
+      "enviado": {
+        "nombre": "",
+        "edad": -1
+      },
+      "estado": 400,
+      "captura": "05_invalido.jpg",
+      "respuesta": "Ver captura real de Postman adjunta"
+    },
+    {
+      "prueba": 6,
+      "herramienta": "Postman Desktop 12.36.3 - Lightweight API Client",
+      "metodo": "DELETE",
+      "url": "http://127.0.0.1:8000/api/animales/9/",
+      "enviado": null,
+      "estado": 204,
+      "captura": "06_eliminar.jpg",
+      "respuesta": "Ver captura real de Postman adjunta",
+      "verificacion_GET_posterior": {
+        "estado": 404,
+        "respuesta": {
+          "detail": "No Animal matches the given query."
+        }
+      }
+    }
+  ],
+  "MySQL": {
+    "version": "8.4.13",
+    "base": "examen_animales",
+    "columnas": [
+      [
+        "id",
+        "bigint",
+        "NO",
+        "PRI",
+        null,
+        "auto_increment"
+      ],
+      [
+        "nombre",
+        "varchar(100)",
+        "NO",
+        "",
+        null,
+        ""
+      ],
+      [
+        "especie",
+        "varchar(100)",
+        "NO",
+        "",
+        null,
+        ""
+      ],
+      [
+        "raza",
+        "varchar(100)",
+        "NO",
+        "",
+        null,
+        ""
+      ],
+      [
+        "edad",
+        "int unsigned",
+        "NO",
+        "",
+        null,
+        ""
+      ],
+      [
+        "created_at",
+        "datetime(6)",
+        "NO",
+        "",
+        null,
+        ""
+      ],
+      [
+        "updated_at",
+        "datetime(6)",
+        "NO",
+        "",
+        null,
+        ""
+      ]
+    ],
+    "fila_despues_de_PUT": {
+      "id": 9,
+      "nombre": "Luna",
+      "especie": "Perro",
+      "raza": "Labrador",
+      "edad": 4,
+      "created_at": "2026-11-13 03:24:52.639358+00:00",
+      "updated_at": "2026-11-13 03:28:48.774967+00:00"
+    },
+    "eliminacion_confirmada": true
+  }
+}
